@@ -1,3 +1,5 @@
-# Stage 1/5: Empty the pencil case
-print("""||||||||
-Your turn! """)
+# Stage 2/5: New rules
+no_pencil = int(input("How many pencils would you like to use:\n"))
+player = input("Who will be the first (John, Jack):\n")
+print("|" * no_pencil)
+print(f"{player} is going first!")
