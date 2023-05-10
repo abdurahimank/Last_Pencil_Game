@@ -1,4 +1,4 @@
-# Stage 4/5: Fair play
+# Stage 5/5: The right strategy
 import random
 
 
@@ -13,35 +13,69 @@ while True:
         break
 print("Who will be the first (John, Jack)")
 while True:
-    player = input()
+    starting_player = player = input()
     if player in ["John", "Jack"]:
         break
     print("Choose between John and Jack")
 no_pencil = int(no_pencil)
 while no_pencil > 0:
     print("|" * no_pencil)
-    if player == "John":
-        player = "Jack"
-        print("John's turn!")
-        while True:
-            pencil_taken = input()
-            if pencil_taken not in ["1", "2", "3"]:
-                print("Possible values: '1', '2' or '3'")
-            elif int(pencil_taken) > no_pencil:
-                print("Too many pencils were taken")
+    if starting_player == "John":
+        if player == "John":
+            player = "Jack"
+            print("John's turn!")
+            while True:
+                pencil_taken = input()
+                if pencil_taken not in ["1", "2", "3"]:
+                    print("Possible values: '1', '2' or '3'")
+                elif int(pencil_taken) > no_pencil:
+                    print("Too many pencils were taken")
+                else:
+                    break
+        elif player == "Jack":
+            player = "John"
+            print("Jack's turn:")
+            if no_pencil % 4 == 2:
+                pencil_taken = 1
+            elif no_pencil % 4 == 3:
+                pencil_taken = 2
+            elif no_pencil % 4 == 0:
+                pencil_taken = 3
             else:
-                break
-    elif player == "Jack":
-        player = "John"
-        print("Jack's turn:")
-        while True:
-            pencil_taken = input()
-            if pencil_taken not in ["1", "2", "3"]:
-                print("Possible values: '1', '2' or '3'")
-            elif int(pencil_taken) > no_pencil:
-                print("Too many pencils were taken")
-            else:
-                break
-    no_pencil -= int(pencil_taken)
+                while True:
+                    pencil_taken = random.randint(1, 3)
+                    if pencil_taken <= no_pencil:
+                        break
+            print(pencil_taken)
+        no_pencil -= int(pencil_taken)
 
+    # Winning strategy is used for BOT aka Jack
+    elif starting_player == "Jack":
+        if player == "John":
+            player = "Jack"
+            print("John's turn!")
+            while True:
+                pencil_taken = input()
+                if pencil_taken not in ["1", "2", "3"]:
+                    print("Possible values: '1', '2' or '3'")
+                elif int(pencil_taken) > no_pencil:
+                    print("Too many pencils were taken")
+                else:
+                    break
+        elif player == "Jack":
+            player = "John"
+            print("Jack's turn:")
+            if no_pencil % 4 == 2:
+                pencil_taken = 1
+            elif no_pencil % 4 == 3:
+                pencil_taken = 2
+            elif no_pencil % 4 == 0:
+                pencil_taken = 3
+            else:
+                while True:
+                    pencil_taken = random.randint(1, 3)
+                    if pencil_taken <= no_pencil:
+                        break
+            print(pencil_taken)
+        no_pencil -= int(pencil_taken)
 print(f"{player} won!")
